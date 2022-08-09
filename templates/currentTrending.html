@@ -1,0 +1,73 @@
+<html>
+   <head>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js'></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js'></script>
+        <script type = "text/javascript" src = "https://www.gstatic.com/charts/loader.js"></script>
+        <script type = "text/javascript"></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+        <style>
+          .navbar-light .navbar-nav .nav-link {
+            color: rgba(0,0,0,.55);
+            font-size: 18px;
+            color: white;
+          }
+
+          .container-fluid {
+             background-color: green;
+          }
+        </style>
+   </head>
+   <body>
+
+    <div class="m-4">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a href="#" class="navbar-brand">
+                <img src="https://www.kindpng.com/picc/m/579-5790366_stock-market-index-svg-png-icon-free-download.png" height="50" width="100" alt="CoolBrand">
+            </a>
+            <div class="collapse navbar-collapse">
+                <div class="navbar-nav">
+                    <span><a class="nav-link" href="/">Back To Home  |  </a></span>
+                    <span class="nav-link">{{ asset }}</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+    </div>
+    <div style="height: 1200px; width: 1200px; margin-left: 180px;">
+        <canvas id="currentTrendingChart"></canvas>
+    </div>
+
+    <script language = "JavaScript">
+        const ctx = document.getElementById('currentTrendingChart').getContext('2d');
+        let labels = [];
+        for (let i = 0; i < 6; i++) {
+            labels = {{ linear_lables | tojson }}
+        }
+
+        const chart = new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels,
+            datasets: [{
+              label: 'Price(in USD) Fluctuations WRT time',
+              data: {{ values }},
+              borderWidth: 5,
+              fill: false,
+              borderColor: 'red'
+            }]
+          },
+          options: {
+          }
+        });
+      </script>
+   </body>
+</html>

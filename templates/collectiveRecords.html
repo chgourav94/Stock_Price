@@ -1,0 +1,43 @@
+{% extends "baseForCollectiveRecords.html" %}
+
+{% block content %}
+  <table id="data" class="table table-striped">
+    <thead>
+      <tr>
+        <th>Exchange_ID</th>
+        <th>Base_Asset</th>
+        <th>Price</th>
+        <th>Price_Changed(in 24 Hours)</th>
+        <th>Stock_Created</th>
+        <th>Stock_Updated</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+        <tr>
+          <td>{{ user.exchange_id }}</td>
+          <td>{{ user.base_asset }}</td>
+          <td>{{ user.price }}</td>
+          <td>{{ user.change_24h }}</td>
+          <td>{{ user.created_at }}</td>
+          <td>{{ user.updated_at }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    $(document).ready(function () {
+      $('#data').DataTable({
+        columns: [
+          null,
+          {searchable: false},
+          {orderable: false, searchable: false},
+          {orderable: false, searchable: false},
+          null],
+      });
+    });
+  </script>
+{% endblock %}
